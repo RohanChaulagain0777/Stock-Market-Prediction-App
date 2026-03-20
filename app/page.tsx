@@ -1,8 +1,10 @@
+
 import Link from "next/link";
 import Navbar from "./components/Navbar"
 import stockImg from "@/public/stockImg.jpg";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BarChart2, TrendingUp, Shield } from "lucide-react";
+import FadeUp from '@/components/ui/FadeUp';
 
 
 export default function Home() {
@@ -14,6 +16,24 @@ export default function Home() {
       {value: "N/A", Label: "Assest Tracked"},
       {value: "N/A", Label: "Active Investor"}
     ]
+
+
+   const features = [
+    {icon: <TrendingUp className = "w-6 h-6 text-emerald-400"/>, 
+     title: "Real-Time Insights",
+     desc: "Live market data and AI-powered signals to keep you ahead a curve"  
+    },
+    {
+      icon: <BarChart2 className="w-6 h-6 text-emerald-400" />,
+      title: "Smart Analytics",
+      desc: "Visualize portfolio performance and trends with intuitive dashboards.",
+    },
+     {
+       icon: <Shield className="w-6 h-6 text-emerald-400" />,
+       title: "Risk Management",
+       desc: "Automated alerts and safeguards that protect your capital.",
+    }
+   ]
 
   return (
     <div>
@@ -72,7 +92,7 @@ export default function Home() {
               Learn More
           </Link>
           </div>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 border-t pt-10 border-white/10 w-full max-w-2xl">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 border-t pt-8 border-white/10 w-full max-w-2xl">
         {
           stats.map((stat) => (
             <div key={stat.Label} className="text-center">
@@ -83,9 +103,26 @@ export default function Home() {
         }
        </div>
         </div>
-
-       
       </section>
+      
+      <FadeUp>
+      <section className="bg-black py-20 px-6">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          {
+            features.map((item) => (
+              <div key={item.title} className="group p-6 rounded-2xl  bg-white/3 border border-white/8 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors duration-300 mb-2">
+                  {item.icon}
+                </div>
+
+                <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+       </FadeUp>
     </div>
   );
 }
