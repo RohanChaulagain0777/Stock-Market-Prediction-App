@@ -65,7 +65,7 @@ export default function Home() {
           </span>
           <div className="flex gap-4 mb-20">
             <Link
-            href="/Dashboard"
+            href="/dashboard"
             className="
               inline-flex items-center gap-2
               bg-transparent text-green-600
@@ -81,7 +81,7 @@ export default function Home() {
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
 
-          <Link href="/About" className="
+          <Link href="/about" className="
               inline-flex items-center gap-2
               bg-transparent text-gray-400
               font-semibold text-[15px]

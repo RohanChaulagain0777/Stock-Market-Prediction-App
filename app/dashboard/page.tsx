@@ -1,28 +1,78 @@
 "use client";
 
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar';
 import TradingView from '@/components/ui/TradingView';
-import MarketData from '@/components/ui/MarketData';
-import News from "@/components/ui/News"
+import HeatMap from '@/components/ui/HeatMap';
+import News from "@/components/ui/News";
 
-const Contact = () => {
+const Dashboard = () => {
   return (
-    <div>
+    <div className="dashboard-root">
       <Navbar />
 
-      <section className="w-full md:max-w-6xl h-auto mt-10 bg-lineat-to-br from-blue-500 via-gray-500 to-green-500">
-        <h1 className='text-center mb-5 text-4xl font-bold'>DashBoard</h1>
-        <div className='flex gap-10 w-full '>
-        <TradingView />
-        <MarketData />
-        </div>
-        <div>
-        <News />
+      {/* Ambient background FX */}
+      <div className="dashboard-bg" aria-hidden="true">
+        <div className="blob blob-1" />
+        <div className="blob blob-2" />
+        <div className="grid-overlay" />
+      </div>
 
-        </div>
-      </section>
+      <main className="dashboard-main">
+
+        {/* Header */}
+        <header className="dashboard-header">
+          <div className="header-eyebrow">
+            <span className="live-dot" />
+            <span>Live Market Data</span>
+          </div>
+          <h1 className="dashboard-title">
+            Market <span className="title-accent">Dashboard</span>
+          </h1>
+          <p className="dashboard-subtitle">
+            Real-time charts, Market quotes & top financial news — all in one place.
+          </p>
+        </header>
+
+
+        {/* Primary grid: chart + quotes */}
+        <section className="widgets-grid">
+          <div className="widget-card widget-chart">
+            <div className="widget-header">
+              <span className="widget-badge">HeatMap</span>
+              <h2 className="widget-title">HeatMap Quotes</h2>
+            </div>
+            <div className="widget-body">
+              <HeatMap />
+            </div>
+          </div>
+
+          <div className="widget-card widget-Heatmap">
+            <div className="widget-header">
+              <span className="widget-badge">Chart</span>
+              <h2 className="widget-title">Symbol Overview</h2>
+            </div>
+            <div className="widget-body">
+              <TradingView />
+            </div>
+          </div>
+        </section>
+
+        {/* News */}
+        <section className="news-section">
+          <div className="widget-card widget-news">
+            <div className="widget-header">
+              <span className="widget-badge">News</span>
+              <h2 className="widget-title">Top Stories</h2>
+            </div>
+            <div className="widget-body">
+              <News />
+            </div>
+          </div>
+        </section>
+
+      </main>
     </div>
   )
 }
 
-export default Contact
+export default Dashboard
