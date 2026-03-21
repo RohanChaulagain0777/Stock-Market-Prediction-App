@@ -16,11 +16,11 @@ const Navbar = () => {
   ]
 
   return (
-    <div className="sticky top-0 z-50 bg-linear-to-br from-gray-500 via-gray-600 to-gray-400">
-      <div className="absolute inset-0 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md border-b border-zinc-200/60 dark:border-zinc-800/60" />
+    <div className="sticky top-0 z-50">
+      <div className="absolute inset-0 bg-black dark:bg-zinc-950/70 backdrop-blur-md border-b border-zinc-200/60 dark:border-zinc-800/60" />
 
       <div className="relative flex justify-between items-center px-10 py-4 max-w-7xl mx-auto">
-        <h1 className="font-extrabold text-2xl tracking-tight select-none">
+        <h1 className="font-extrabold text-2xl tracking-tight select-none text-white">
           Stoc<span className="text-green-600">King</span>
         </h1>
 

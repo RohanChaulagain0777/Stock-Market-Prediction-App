@@ -1,10 +1,16 @@
 
-const login = () => {
+const SignIn = () => {
   return (
     <div>
-      This is a login file
+      <section>
+        <h1>Sign In</h1>
+
+        <form>
+          <input type="text" />
+        </form>
+      </section>
     </div>
   )
 }
 
-export default login
+export default SignIn

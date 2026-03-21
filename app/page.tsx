@@ -5,6 +5,7 @@ import stockImg from "@/public/stockImg.jpg";
 import Image from "next/image";
 import { ArrowRight, BarChart2, TrendingUp, Shield } from "lucide-react";
 import FadeUp from '@/components/ui/FadeUp';
+import Footer from './footer/page'
 
 
 export default function Home() {
@@ -49,14 +50,14 @@ export default function Home() {
 
         <div className="relative z-20 flex items-center gap-4 justify-center h-screen text-white flex-col">
 
-          <h1 className="text-6xl md:text-8xl font-extrabold text-green-600 tracking-tight leading-none mb-6">
+          <h1 className="text-6xl md:text-8xl font-extrabold text-green-600 tracking-tight leading-none mb-6 mt-5">
             <span className="text-white block">Grow</span> 
            <span className="block bg-linear-to-r from-emerald-400 via-green-300 to-teal-400 bg-clip-text text-transparent">
               With Us.
             </span>
             </h1>
 
-          <p className="text-xl md:text-2xl font-light text-gray-300 max-w-xl leading-relaxed mb-4">Make your every investment
+          <p className="text-xl md:text-2xl font-semibold text-gray-300 max-w-xl leading-relaxed mb-4">Make your every investment
            <span className="text-white italic font-semibold"> Profitable.</span> </p>
 
           <span className="text-sm md:text-base max-w-lg mb-10 leading-relaxed text-gray-500 text-center">
@@ -95,7 +96,7 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 border-t pt-8 border-white/10 w-full max-w-2xl">
         {
           stats.map((stat) => (
-            <div key={stat.Label} className="text-center">
+            <div key={stat.Label} className="text-center mb-5">
               <p className="text-2xl md:text-3xl font-black text-emerald-400">{stat.value}</p>
               <p className="tracking-widest uppercase text-xs text-gray-500 mt-1">{stat.Label}</p>
             </div>
@@ -110,7 +111,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {
             features.map((item) => (
-              <div key={item.title} className="group p-6 rounded-2xl  bg-white/3 border border-white/8 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-300">
+              <div key={item.title} className="group p-6 rounded-2xl  bg-white/3 border border-white/8 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all duration-300 mb-10">
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors duration-300 mb-2">
                   {item.icon}
                 </div>
@@ -123,6 +124,19 @@ export default function Home() {
         </div>
       </section>
        </FadeUp>
+
+       <FadeUp>
+        <div className="bg-black flex justify-center items-center flex-col gap-6 text-white">
+          <span className="text-xl leading-relaxed font-semibold text-green-500 text-blue-500">Recognized by  <span className="text-white italic">Professional</span></span>
+          <h1 className="text-3xl font-bold leading-tight">Trusted by vast number of users</h1>
+          <div className="text-center w-[60%]">
+            <p className="text-gray-500 text-lg leading-relaxed">StocKing are used by many people daily to do a systametic investment on the next hot thing and helping them to create a better investment.</p>
+          </div>
+          <Link href="sign-in" className="text-lg font-bold bg-pink-400 px-3 py-2  rounded-3xl hover:bg-pink-500 mb-10">Join for Free</Link>
+        </div>
+       </FadeUp>
+       
+       <Footer />
     </div>
   );
 }
