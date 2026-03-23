@@ -105,7 +105,7 @@ export default function Home() {
        </div>
         </div>
       </section>
-      
+
       <FadeUp>
       <section className="bg-black py-20 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
