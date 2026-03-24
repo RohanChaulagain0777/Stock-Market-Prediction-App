@@ -5,7 +5,7 @@ import stockImg from "@/public/stockImg.jpg";
 import Image from "next/image";
 import { ArrowRight, BarChart2, TrendingUp, Shield } from "lucide-react";
 import FadeUp from '@/components/ui/FadeUp';
-import Footer from './footer/page'
+import Footer from "./components/Footer"
 
 
 export default function Home() {
@@ -13,8 +13,8 @@ export default function Home() {
 
   const stats = 
     [
-      {value: "N/A", Label: "Sucess Rate"},
-      {value: "N/A", Label: "Assest Tracked"},
+      {value: "N/A", Label: "Success Rate"},
+      {value: "N/A", Label: "Assets Tracked"},
       {value: "N/A", Label: "Active Investor"}
     ]
 

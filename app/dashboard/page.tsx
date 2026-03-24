@@ -4,94 +4,44 @@ import Navbar from '../components/Navbar';
 import TradingView from '@/components/ui/TradingView';
 import HeatMap from '@/components/ui/HeatMap';
 import News from "@/components/ui/News";
-import React, { useEffect, useState } from 'react';
-
-const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-  return isMobile;
-};
 
 const Dashboard = () => {
-  const isMobile = useIsMobile();
-
   return (
-    <div style={styles.root}>
-      <style>{`
-        @media (max-width: 767px) {
-          .dashboard-row {
-            flex-direction: column !important;
-          }
-          .dashboard-panel {
-            flex: 1 1 100% !important;
-            width: 100% !important;
-          }
-          .dashboard-card-tall {
-            height: 340px !important;
-          }
-          .dashboard-card-short {
-            height: 320px !important;
-          }
-          .dashboard-main {
-            padding: 16px 12px 32px !important;
-            gap: 16px !important;
-          }
-          .dashboard-row {
-            gap: 16px !important;
-          }
-        }
-        @media (min-width: 768px) and (max-width: 1024px) {
-          .dashboard-card-tall {
-            height: 400px !important;
-          }
-          .dashboard-card-short {
-            height: 360px !important;
-          }
-          .dashboard-main {
-            padding: 20px 16px 40px !important;
-          }
-        }
-      `}</style>
-
+    <div className="min-h-screen bg-[#f5f6f8] text-[#111] font-['Inter','Segoe_UI',sans-serif]">
       <Navbar />
 
-      <main style={styles.main} className="dashboard-main">
+      <main className="max-w-[1400px] mx-auto px-6 pt-7 pb-12 flex flex-col gap-7 md:px-4 md:pt-5 md:pb-10 sm:px-3 sm:pt-4 sm:pb-8 sm:gap-4">
 
-        <div style={styles.row} className="dashboard-row">
-          <section style={styles.panel} className="dashboard-panel">
-            <h2 style={styles.sectionTitle}>Market Overview</h2>
-            <div style={{ ...styles.card, height: 520 }} className="dashboard-card-tall">
+        <div className="flex gap-6 items-start max-md:flex-col max-md:gap-4">
+          <section className="flex-1 flex flex-col gap-3 min-w-0">
+            <h2 className="text-xl font-bold text-[#111] m-0 tracking-tight">Market Overview</h2>
+            <div className="bg-white rounded-xl border border-[#e4e6ea] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.06)] h-[520px] max-md:h-[340px] md:max-lg:h-[400px]">
               <TradingView />
             </div>
           </section>
 
-          <section style={{ ...styles.panel, flex: 2 }} className="dashboard-panel">
-            <h2 style={styles.sectionTitle}>Stock Heatmap</h2>
-            <div style={{ ...styles.card, height: 520 }} className="dashboard-card-tall">
+          <section className="flex-[2] flex flex-col gap-3 min-w-0 max-md:flex-1 max-md:w-full">
+            <h2 className="text-xl font-bold text-[#111] m-0 tracking-tight">Stock Heatmap</h2>
+            <div className="bg-white rounded-xl border border-[#e4e6ea] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.06)] h-[520px] max-md:h-[340px] md:max-lg:h-[400px]">
               <HeatMap />
             </div>
           </section>
         </div>
-
-        <div style={styles.row} className="dashboard-row">
-          <section style={styles.panel} className="dashboard-panel">
-            <h2 style={styles.sectionTitle}>Top Stories</h2>
-            <div style={{ ...styles.card, height: 420 }} className="dashboard-card-short">
+    
+        <div className="flex gap-6 items-start max-md:flex-col max-md:gap-4">
+          <section className="flex-1 flex flex-col gap-3 min-w-0">
+            <h2 className="text-xl font-bold text-[#111] m-0 tracking-tight">Top Stories</h2>
+            <div className="bg-white rounded-xl border border-[#e4e6ea] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.06)] h-[420px] max-md:h-[320px] md:max-lg:h-[360px]">
               <News />
             </div>
           </section>
 
-          <section style={{ ...styles.panel, flex: 2 }} className="dashboard-panel">
-            <h2 style={styles.sectionTitle}>Market Quotes</h2>
-            <div style={{ ...styles.card, height: 420 }} className="dashboard-card-short">
+          <section className="flex-[2] flex flex-col gap-3 min-w-0 max-md:flex-1 max-md:w-full">
+            <h2 className="text-xl font-bold text-[#111] m-0 tracking-tight">Market Quotes</h2>
+            <div className="bg-white rounded-xl border border-[#e4e6ea] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.06)] h-[420px] max-md:h-[320px] md:max-lg:h-[360px]">
               <iframe
                 src="https://s.tradingview.com/embed-widget/market-quotes/?locale=en#%7B%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Afalse%2C%22showSymbolLogo%22%3Atrue%2C%22backgroundColor%22%3A%22%23ffffff%22%2C%22locale%22%3A%22en%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A%22100%25%22%2C%22symbolsGroups%22%3A%5B%7B%22name%22%3A%22Indices%22%2C%22symbols%22%3A%5B%7B%22name%22%3A%22FOREXCOM%3ASPXUSD%22%2C%22displayName%22%3A%22S%26P%20500%22%7D%2C%7B%22name%22%3A%22FOREXCOM%3ANSXUSD%22%2C%22displayName%22%3A%22Nasdaq%20100%22%7D%2C%7B%22name%22%3A%22FOREXCOM%3ADJI%22%2C%22displayName%22%3A%22Dow%2030%22%7D%5D%7D%2C%7B%22name%22%3A%22Stocks%22%2C%22symbols%22%3A%5B%7B%22name%22%3A%22NASDAQ%3AAAPL%22%7D%2C%7B%22name%22%3A%22NASDAQ%3AGOOGL%22%7D%2C%7B%22name%22%3A%22NASDAQ%3AMSFT%22%7D%2C%7B%22name%22%3A%22NYSE%3AJPM%22%7D%2C%7B%22name%22%3A%22NYSE%3ABAC%22%7D%5D%7D%5D%7D"
-                style={{ width: "100%", height: "100%", border: "none" }}
+                className="w-full h-full border-none"
                 title="Market Quotes"
               />
             </div>
@@ -101,49 +51,6 @@ const Dashboard = () => {
       </main>
     </div>
   );
-};
-
-const styles: Record<string, React.CSSProperties> = {
-  root: {
-    minHeight: "100vh",
-    background: "#f5f6f8",
-    color: "#111",
-    fontFamily: "'Inter', 'Segoe UI', sans-serif",
-  },
-  main: {
-    maxWidth: 1400,
-    margin: "0 auto",
-    padding: "28px 24px 48px",
-    display: "flex",
-    flexDirection: "column",
-    gap: 28,
-  },
-  row: {
-    display: "flex",
-    gap: 24,
-    alignItems: "flex-start",
-  },
-  panel: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    gap: 12,
-    minWidth: 0, 
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 700,
-    color: "#111",
-    margin: 0,
-    letterSpacing: "-0.01em",
-  },
-  card: {
-    background: "#ffffff",
-    borderRadius: 12,
-    border: "1px solid #e4e6ea",
-    overflow: "hidden",
-    boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
-  },
 };
 
 export default Dashboard;
