@@ -8,6 +8,19 @@ import Link from "next/link";
 
 const SignIn = () => {
   const [show, setShow] = useState<boolean>(false);
+  const [password, setpassword] = useState<string>("");
+  const [confirmPass, setConfirmPass] = useState<string>("");
+
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if(password !== confirmPass){
+        return(
+            <p>Incorrect Password</p>
+        )
+    }
+  }
+
 
   return (
     <div className="relative min-h-screen">
@@ -23,13 +36,26 @@ const SignIn = () => {
         <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-10 shadow-2xl">
 
           <h1 className="text-4xl font-extrabold text-white tracking-tight mb-1">
-            Sign <span className="text-green-400">In</span>
+            Sign <span className="text-green-400">Up</span>
           </h1>
           <p className="text-sm text-white/40 font-light mb-8">
-            Welcome back — enter your details below
+            Enter your details below
           </p>
 
-          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="name" className="text-xs font-medium uppercase tracking-widest text-white/40">
+                Username
+              </label>
+              <input
+                type="text"
+                id="name"
+                placeholder="e.g. johndoe"
+                className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/20 outline-none focus:border-green-400/50 focus:bg-green-400/5 focus:ring-2 focus:ring-green-400/10 transition"
+                required
+              />
+            </div>
 
             <div className="flex flex-col gap-1.5">
               <label htmlFor="email" className="text-xs font-medium uppercase tracking-widest text-white/40">
@@ -42,7 +68,6 @@ const SignIn = () => {
                 className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/20 outline-none focus:border-green-400/50 focus:bg-green-400/5 focus:ring-2 focus:ring-green-400/10 transition"
                 required
               />
-              
             </div>
 
             <div className="flex flex-col gap-1.5">
@@ -68,6 +93,28 @@ const SignIn = () => {
               </div>
             </div>
 
+                 <div className="flex flex-col gap-1.5">
+              <label htmlFor="confirmPassword" className="text-xs font-medium uppercase tracking-widest text-white/40">
+              Confirm  Password
+              </label>
+              <div className="relative">
+                <input
+                  type={show ? "text" : "password"}
+                  id="confirmPassword"
+                  placeholder="••••••••"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 pr-12 text-sm text-white placeholder-white/20 outline-none focus:border-green-400/50 focus:bg-green-400/5 focus:ring-2 focus:ring-green-400/10 transition"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShow((prev) => !prev)}
+                  aria-label={show ? "Hide password" : "Show password"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-green-400 transition cursor-pointer"
+                >
+                  {show ? <Eye size={16} /> : <EyeOff size={16} />}
+                </button>
+              </div>
+            </div>
 
             <hr className="border-white/10 my-1" />
 
@@ -81,9 +128,9 @@ const SignIn = () => {
           </form>
           
             <p className="text-center mt-6 text-xs text-white/30">
-            Don&apos;t have an account?{" "}
-            <Link href="/sign-up" className="text-green-400/80 hover:text-green-400 font-medium transition">
-              Create one
+              have an account?{" "}
+            <Link href="/sign-in" className="text-green-400/80 hover:text-green-400 font-medium transition">
+              Sign In
             </Link>
           </p>
         </div>
