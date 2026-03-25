@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import TradingView from '@/components/ui/TradingView';
 import HeatMap from '@/components/ui/HeatMap';
 import News from "@/components/ui/News";
+import Stock from "../stock/page"
 
 const Dashboard = () => {
   return (
@@ -24,6 +25,15 @@ const Dashboard = () => {
             <h2 className="text-xl font-bold text-[#111] m-0 tracking-tight">Stock Heatmap</h2>
             <div className="bg-white rounded-xl border border-[#e4e6ea] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.06)] h-[520px] max-md:h-[340px] md:max-lg:h-[400px]">
               <HeatMap />
+            </div>
+          </section>
+        </div>
+
+        <div className="flex gap-6 items-start max-md:flex-col max-md:gap-4">
+          <section className="flex-1 flex flex-col gap-3 min-w-0">
+            <h2 className="text-2xl font-bold text-[#111] m-0 tracking-tight text-center">Prediction Data</h2>
+            <div className="bg-white rounded-xl border border-[#e4e6ea] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.06)] h-[420px] max-md:h-[320px] md:max-lg:h-[360px]">
+              <Stock />
             </div>
           </section>
         </div>
