@@ -4,10 +4,12 @@ import NavDropdown from "./DropdownMenu"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Info, House, Activity } from 'lucide-react'
+import { SignInButton, UserButton, useAuth } from '@clerk/nextjs'
 
 
 const Navbar = () => {
   const pathname = usePathname()
+  const { isSignedIn } = useAuth()
 
   const navLinks = [
     { href: "/", label: "Home", icon: <House size={18} /> },
@@ -54,18 +56,17 @@ const Navbar = () => {
         </nav>
 
         
-        <Link
-          href="/sign-in"
-          className="
-            hidden md:block
-            text-sm font-semibold py-2 px-5 rounded-xl
-            bg-green-600 text-white
-            hover:bg-green-500 active:scale-95
-            transition-all duration-150 shadow-sm shadow-green-200 dark:shadow-green-900/30
-          "
-        >
-          Log in
-        </Link>
+       {!isSignedIn && (
+        <SignInButton mode="redirect">
+          <button className="hidden md:block text-sm font-semibold py-2 px-5 rounded-xl bg-green-600 text-white hover:bg-green-500 active:scale-95 transition-all duration-150">
+            Log in
+          </button>
+        </SignInButton>
+      )}
+
+      {isSignedIn && (
+        <UserButton afterSignOutUrl="/" />
+      )}
 
        
         <NavDropdown />
