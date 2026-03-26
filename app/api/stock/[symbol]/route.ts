@@ -1,27 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
-
-interface YahooMeta {
-  symbol: string;
-  currency: string;
-  regularMarketPrice: number;
-  chartPreviousClose: number;
-}
-
-interface YahooResult {
-  meta: YahooMeta;
-  timestamp: number[];
-  indicators: {
-    quote: { close: number[] }[];
-  };
-}
-
-interface YahooResponse {
-  chart: {
-    result: YahooResult[] | null;
-    error: string | null;
-  };
-}
 
 export interface StockData {
   symbol: string;
@@ -31,99 +8,79 @@ export interface StockData {
   history: { date: string; close: number | null }[];
 }
 
-// Shared cookie+crumb cache (lives as long as the server process)
-let cachedCookie: string | null = null;
-let cachedCrumb: string | null = null;
+const API_KEY = process.env.FINNHUB_API_KEY;
 
-const HEADERS = {
-  "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-  Accept: "application/json, text/plain, */*",
-  "Accept-Language": "en-US,en;q=0.9",
-  Origin: "https://finance.yahoo.com",
-  Referer: "https://finance.yahoo.com/",
-};
+// Simple in-memory cache: { [symbol]: { data, expiresAt } }
+const cache = new Map<string, { data: StockData; expiresAt: number }>();
+const CACHE_TTL_MS = 60 * 1000; // 1 minute
 
-async function getCookieAndCrumb(): Promise<{ cookie: string; crumb: string }> {
-  // Return cached values if available
-  if (cachedCookie && cachedCrumb) {
-    return { cookie: cachedCookie, crumb: cachedCrumb };
-  }
-
-  // Step 1: Hit fc.yahoo.com to get the session cookie
-  const cookieRes = await fetch("https://fc.yahoo.com", {
-    headers: HEADERS,
-    redirect: "follow",
-  });
-
-  const rawCookies = cookieRes.headers.getSetCookie?.() ?? [];
-  const cookie = rawCookies
-    .map((c) => c.split(";")[0])
-    .join("; ");
-
-  if (!cookie) throw new Error("Failed to retrieve Yahoo session cookie");
-
-  // Step 2: Use the cookie to fetch the crumb
-  const crumbRes = await fetch(
-    "https://query1.finance.yahoo.com/v1/test/getcrumb",
-    {
-      headers: { ...HEADERS, Cookie: cookie },
-    }
-  );
-
-  const crumb = await crumbRes.text();
-
-  if (!crumb || crumb.includes("error") || crumb.length > 20) {
-    throw new Error("Failed to retrieve valid crumb");
-  }
-
-  // Cache for reuse
-  cachedCookie = cookie;
-  cachedCrumb = crumb;
-
-  return { cookie, crumb };
+function validateSymbol(symbol: string): boolean {
+  return /^[A-Z0-9.^-]{1,10}$/.test(symbol);
 }
 
 export async function GET(
   _req: NextRequest,
   { params }: { params: { symbol: string } }
 ) {
-  const { symbol } = params;
+  const symbol = params.symbol.toUpperCase();
+
+  // Validate input
+  if (!validateSymbol(symbol)) {
+    return NextResponse.json({ error: "Invalid symbol" }, { status: 400 });
+  }
+
+  if (!API_KEY) {
+    return NextResponse.json({ error: "API key not configured" }, { status: 500 });
+  }
+
+  // Return cached data if fresh
+  const cached = cache.get(symbol);
+  if (cached && Date.now() < cached.expiresAt) {
+    return NextResponse.json(cached.data);
+  }
 
   try {
-    const { cookie, crumb } = await getCookieAndCrumb();
+    // Fetch current quote and candle history in parallel
+    const [quoteRes, candleRes] = await Promise.all([
+      fetch(
+        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`
+      ),
+      fetch(
+        `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=D&count=30&token=${API_KEY}`
+      ),
+    ]);
 
-    const url = `https://query2.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1mo&crumb=${encodeURIComponent(crumb)}`;
-
-    const res = await fetch(url, {
-      headers: { ...HEADERS, Cookie: cookie },
-    });
-
-    if (!res.ok) {
-      // Bust the cache and let the client retry
-      cachedCookie = null;
-      cachedCrumb = null;
-      throw new Error(`Yahoo Finance responded with ${res.status}`);
+    if (!quoteRes.ok || !candleRes.ok) {
+      throw new Error("Finnhub request failed");
     }
 
-    const data: YahooResponse = await res.json();
-    const result = data.chart.result?.[0];
+    const quote = await quoteRes.json();
+    const candle = await candleRes.json();
 
-    if (!result) throw new Error(`No data found for symbol: ${symbol}`);
+    // Finnhub returns { s: "no_data" } when symbol doesn't exist
+    if (quote.c === 0 || candle.s === "no_data") {
+      return NextResponse.json(
+        { error: `No data found for symbol: ${symbol}` },
+        { status: 404 }
+      );
+    }
 
-    const { meta, timestamp, indicators } = result;
-    const closes = indicators.quote[0].close;
+    const history: { date: string; close: number | null }[] =
+      candle.t?.map((timestamp: number, i: number) => ({
+        date: new Date(timestamp * 1000).toISOString().split("T")[0],
+        close: candle.c[i] ?? null,
+      })) ?? [];
 
     const payload: StockData = {
-      symbol: meta.symbol,
-      currency: meta.currency,
-      currentPrice: meta.regularMarketPrice,
-      previousClose: meta.chartPreviousClose,
-      history: timestamp.map((t, i) => ({
-        date: new Date(t * 1000).toISOString().split("T")[0],
-        close: closes[i] ?? null,
-      })),
+      symbol,
+      currency: "USD",
+      currentPrice: quote.c,        // current price
+      previousClose: quote.pc,      // previous close
+      history,
     };
+
+    // Cache the result
+    cache.set(symbol, { data: payload, expiresAt: Date.now() + CACHE_TTL_MS });
 
     return NextResponse.json(payload);
   } catch (err) {
