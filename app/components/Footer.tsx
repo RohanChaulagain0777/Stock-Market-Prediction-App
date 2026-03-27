@@ -6,7 +6,7 @@ const page = () => {
       <div className="border-t border-white/10 max-w-6xl py-8 text-white flex gap-20"> 
        <p>© StocKing</p>
        <div className="flex gap-12">
-        <Link  href="/terms">terms of use</Link>
+        <Link  href="/termsofuse">terms of use</Link>
         <Link href="privacy" >Privacy Policy </Link>
        </div>
       </div>
