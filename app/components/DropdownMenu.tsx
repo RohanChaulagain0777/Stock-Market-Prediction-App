@@ -27,7 +27,7 @@ export default function NavDropdown() {
           <DropdownMenuItem><Link href="/">Home</Link></DropdownMenuItem>
           <DropdownMenuItem><Link href="/dashboard">Dashboard</Link></DropdownMenuItem>
           <DropdownMenuItem><Link href="/about">About</Link></DropdownMenuItem>
-          <DropdownMenuItem onClick={handleSignOut}>Logout</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleSignOut}>Sign In</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
