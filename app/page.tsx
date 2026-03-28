@@ -93,7 +93,7 @@ export default function Home() {
               Learn More
           </Link>
           </div>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 border-t pt-8 border-white/10 w-full max-w-2xl">
+          <div className="flex flex-wrap justify-center gap-8 grid-cols-1 sm:grid-cols-3 md:gap-16 border-t pt-8 border-white/10 w-full max-w-2xl">
         {
           stats.map((stat) => (
             <div key={stat.Label} className="text-center mb-5">
@@ -132,7 +132,7 @@ export default function Home() {
           <div className="text-center w-[60%]">
             <p className="text-gray-500 text-lg leading-relaxed">StocKing are used by many people daily to do a systametic investment on the next hot thing and helping them to create a better investment.</p>
           </div>
-          <Link href="sign-in" className="text-lg font-bold bg-pink-400 px-3 py-2  rounded-3xl hover:bg-pink-500 mb-10">Join for Free</Link>
+          <Link href="/sign-in" className="text-lg font-bold bg-pink-400 px-3 py-2  rounded-3xl hover:bg-pink-500 mb-10">Join for Free</Link>
         </div>
        </FadeUp>
        

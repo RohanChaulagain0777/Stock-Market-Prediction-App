@@ -10,14 +10,15 @@ import {
 import { useRouter } from "next/navigation"
 import { Menu} from 'lucide-react';
 import Link from "next/link";
+import { useClerk } from '@clerk/nextjs'
 
 export default function NavDropdown() {
 
   const router = useRouter(); 
+  const { signOut } = useClerk()
+  const handleSignOut = async () => { await signOut(); router.push('/') }
 
-  const handleSignOut = async () => {
-    router.push('/sign-in')
-  }
+
 
   return (
     <div className="block md:hidden">
@@ -27,7 +28,7 @@ export default function NavDropdown() {
           <DropdownMenuItem><Link href="/">Home</Link></DropdownMenuItem>
           <DropdownMenuItem><Link href="/dashboard">Dashboard</Link></DropdownMenuItem>
           <DropdownMenuItem><Link href="/about">About</Link></DropdownMenuItem>
-          <DropdownMenuItem onClick={handleSignOut}>Sign In</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleSignOut}>Log Out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
