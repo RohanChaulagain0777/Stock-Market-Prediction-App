@@ -20,7 +20,7 @@ const About = () => {
     {
       icon: <Eye className="w-6 h-6 text-emerald-400" />,
       title: "Transparent Methodology",
-      desc: `No "black boxes." We provide the reasoning behind every prediction, empowering users with context, not just numbers.`
+      desc: "No &quot;black boxes.&quot; We provide the reasoning behind every prediction, empowering users with context, not just numbers."
     }
   ];
 
@@ -60,7 +60,7 @@ const About = () => {
               tools needed to navigate modern volatility.
             </p>
             <p className="text-gray-500 pb-2 md:pb-4">
-              We don't just provide data; we provide architectural insight.
+              We don&apos;t just provide data; we provide architectural insight.
               Every prediction is a culmination of millions of data points
               processed through our Sovereign Ledger methodology.
             </p>
