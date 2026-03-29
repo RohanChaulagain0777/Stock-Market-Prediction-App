@@ -1,6 +1,6 @@
 # 📈 StocKing – Stock Market Prediction App
 
-A modern stock market tracking and prediction web application built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. This app allows users to search for stock symbols, view real-time price data, and analyze recent trends using historical data.
+A modern stock market tracking and prediction web application built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. This app allows users to search for stock symbols, view real-time price data, and analyze recent trends using historical data. 
 
 ---
 
@@ -36,26 +36,6 @@ A modern stock market tracking and prediction web application built with **Next.
 
 ---
 
-## 📁 Project Structure
-app/
-│
-├── api/
-│ └── stock/[symbol]/route.ts # API route for fetching stock data
-│
-├── components/ # Reusable UI components
-│ ├── Navbar.tsx
-│ ├── Footer.tsx
-│ └── DropdownMenu.tsx
-│
-├── dashboard/ # Main dashboard page
-├── about/ # About page
-├── layout.tsx # Root layout
-├── page.tsx # Home page
-│
-public/ # Static assets
-
----
-
 
 👨‍💻 Author
-Developed by Rohan Chaulagain
+Developed by Rohan Chaulagain and Claude.ai
