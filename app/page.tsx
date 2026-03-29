@@ -127,7 +127,7 @@ export default function Home() {
 
        <FadeUp>
         <div className="bg-black flex justify-center items-center flex-col gap-6 text-white">
-          <span className="text-xl leading-relaxed font-semibold text-green-500 text-blue-500">Recognized by  <span className="text-white italic">Professional</span></span>
+          <span className="text-xl leading-relaxed font-semibold text-green-500 ">Recognized by  <span className="text-white italic">Professional</span></span>
           <h1 className="text-3xl font-bold leading-tight">Trusted by vast number of users</h1>
           <div className="text-center w-[60%]">
             <p className="text-gray-500 text-lg leading-relaxed">StocKing are used by many people daily to do a systematic investment on the next hot thing and helping them to create a better investment.</p>
