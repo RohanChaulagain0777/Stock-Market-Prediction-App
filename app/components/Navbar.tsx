@@ -65,7 +65,7 @@ const Navbar = () => {
       )}
 
       {isSignedIn && (
-        <UserButton afterSignOutUrl="/" />
+        <UserButton />
       )}
 
        
