@@ -38,4 +38,5 @@ A modern stock market tracking and prediction web application built with **Next.
 
 
 👨‍💻 Author
+---
 Developed by Rohan Chaulagain and Claude.ai
