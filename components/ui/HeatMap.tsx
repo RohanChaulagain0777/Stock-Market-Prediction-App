@@ -4,10 +4,12 @@
 import React, { useEffect, useRef, memo } from 'react';
 
 function TradingViewWidget() {
-  const container = useRef();
+  const container = useRef<HTMLDivElement>(null);
 
   useEffect(
     () => {
+      if(!container.current) return;
+
       const script = document.createElement("script");
       script.src = "https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js";
       script.type = "text/javascript";
@@ -31,6 +33,12 @@ function TradingViewWidget() {
           "height": "100%"
         }`;
       container.current.appendChild(script);
+
+      return() => {
+        if(container.current){
+          container.current.innerHTML = "";
+        }
+      }
     },
     []
   );

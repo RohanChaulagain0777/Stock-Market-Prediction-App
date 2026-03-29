@@ -42,17 +42,17 @@ export default function Home() {
       <section className="relative min-h-screen">
           <Image src={stockImg} alt="Stock" className="absolute inset-0 w-full h-full object-cover z-0"/>
 
-          <div className="absolute inset-0 bg-linear-to-br from-black/70 via-black/90 to-emerald-960/70 z-10"/>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/90 to-emerald-950/70 z-10"/>
 
-          <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent z-10"/>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"/>
 
-          <div className="absolute top-1/3 rounded-full left-1/2 inset-0 bg-emerald-500/10 blur-[120px] z-10 w-150 h-150 -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute top-1/3 rounded-full left-1/2 inset-0 bg-emerald-500/10 blur-[120px] z-10 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2" />
 
         <div className="relative z-20 flex items-center gap-4 justify-center h-screen text-white flex-col">
 
           <h1 className="text-6xl md:text-8xl font-extrabold text-green-600 tracking-tight leading-none mb-6 mt-5">
             <span className="text-white block">Grow</span> 
-           <span className="block bg-linear-to-r from-emerald-400 via-green-300 to-teal-400 bg-clip-text text-transparent">
+           <span className="block bg-gradient-to-r from-emerald-400 via-green-300 to-teal-400 bg-clip-text text-transparent">
               With Us.
             </span>
             </h1>
@@ -130,9 +130,9 @@ export default function Home() {
           <span className="text-xl leading-relaxed font-semibold text-green-500 text-blue-500">Recognized by  <span className="text-white italic">Professional</span></span>
           <h1 className="text-3xl font-bold leading-tight">Trusted by vast number of users</h1>
           <div className="text-center w-[60%]">
-            <p className="text-gray-500 text-lg leading-relaxed">StocKing are used by many people daily to do a systametic investment on the next hot thing and helping them to create a better investment.</p>
+            <p className="text-gray-500 text-lg leading-relaxed">StocKing are used by many people daily to do a systematic investment on the next hot thing and helping them to create a better investment.</p>
           </div>
-          <Link href="/sign-in" className="text-lg font-bold bg-pink-400 px-3 py-2  rounded-3xl hover:bg-pink-500 mb-10">Join for Free</Link>
+          <Link href="/sign-in" className="text-lg font-bold bg-emerald-400 px-3 py-2 rounded-3xl hover:bg-emerald-500 mb-10">Join for Free</Link>
         </div>
        </FadeUp>
        

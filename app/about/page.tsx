@@ -4,7 +4,7 @@ import wallstreetImg from "@/public/wallstreetImg.jpg";
 import { SquareChartGantt, Brain, Eye } from "lucide-react";
 import Footer from "../components/Footer";
 
-const about = () => {
+const About = () => {
 
   const edges = [
     {
@@ -14,7 +14,7 @@ const about = () => {
     },
     {
       icon: <Brain className="w-6 h-6 text-emerald-400" />,
-      title: "Predicive AI Models",
+      title: "Predictive AI Models",
       desc: "Utilizing deep learning ensembles that adapt in real-time to shifting market regimes and black swan events."
     },
     {
@@ -96,4 +96,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;

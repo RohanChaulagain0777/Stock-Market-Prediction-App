@@ -4,10 +4,13 @@
 import React, { useEffect, useRef, memo } from 'react';
 
 function TradingViewWidget() {
-  const container = useRef();
+  const container = useRef<HTMLDivElement>(null);
 
   useEffect(
     () => {
+
+      if(!container.current) return;
+
       const script = document.createElement("script");
       script.src = "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
       script.type = "text/javascript";
@@ -19,10 +22,17 @@ function TradingViewWidget() {
           "colorTheme": "dark",
           "isTransparent": false,
           "locale": "en",
-          "width": 400,
-          "height": 550
+          "width": "100%",
+          "height": "100%"
         }`;
+
       container.current.appendChild(script);
+
+      return() => {
+        if(container.current){
+        container.current.innerHTML= "";
+      }
+      }
     },
     []
   );
